@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test CORS</title>
+</head>
+<body>
+    <h1>Test CORS</h1>
+    <button onclick="testCors()">Test CORS</button>
+    <div id="result"></div>
+
+    <script>
+        function testCors() {
+            fetch('http://127.0.0.1:8000/api/register', {
+                method: 'OPTIONS',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                document.getElementById('result').innerHTML = 'CORS Test Success: ' + response.status;
+                console.log('Headers:', response.headers);
+            })
+            .catch(error => {
+                document.getElementById('result').innerHTML = 'CORS Test Failed: ' + error;
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
